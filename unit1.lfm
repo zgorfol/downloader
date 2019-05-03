@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 467
+  Left = 370
   Height = 596
-  Top = 159
+  Top = 149
   Width = 1034
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
@@ -537,6 +537,23 @@ object frmMain: TfrmMain
       OnClick = btnRemoveClick
       TabOrder = 6
     end
+    object labLinkTherapy: TLabel
+      Cursor = crHandPoint
+      Left = 896
+      Height = 15
+      Top = 13
+      Width = 70
+      Caption = 'See therapy...'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clNavy
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+      OnClick = labLinkTherapyClick
+    end
   end
   object statusBar: TStatusBar
     Left = 0
@@ -628,6 +645,7 @@ object frmMain: TfrmMain
     Parity = pNone
     FlowControl = fcNone
     StopBits = sbOne
+    Device = 'COM1'
     RcvLineCRLF = False
     OnRxData = serialRxData
     left = 816
@@ -636,14 +654,16 @@ object frmMain: TfrmMain
   object openDlg: TOpenDialog
     Title = 'Open existing therapy script'
     DefaultExt = '.txt'
-    Filter = '.txt'
+    Filter = 'txt|*.txt'
+    Options = []
     left = 840
     top = 336
   end
   object saveDlg: TSaveDialog
     Title = 'Save file as therapy script'
     DefaultExt = '.txt'
-    Filter = '.txt'
+    Filter = 'txt|*.txt'
+    Options = []
     left = 792
     top = 336
   end

@@ -24,6 +24,7 @@ type
     edtScriptNo: TEdit;
     imgLogo: TImage;
     Label1: TLabel;
+    labLinkTherapy: TLabel;
     memoConsole: TMemo;
     memoScript: TMemo;
     openDlg: TOpenDialog;
@@ -44,8 +45,10 @@ type
     procedure btnUploadClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure imgLogoClick(Sender: TObject);
+    procedure labLinkTherapyClick(Sender: TObject);
     procedure serialRxData(Sender: TObject);
   private
+    readBuffer :string;
 
 
   public
@@ -92,8 +95,8 @@ begin
       httpClient.Document.SaveToStream(strm);
       strm.Position:=0;
       memoScript.Lines.LoadFromStream(strm);
-      frmMain.Caption:='downloader - https://biotronics.eu/node/'+edtScriptNo.Text;
-      statusBar.SimpleText:='Downloaded from portal: https://biotronics.eu/node/'+edtScriptNo.Text+ ' Click on top bar to see therapy page!';
+      //frmMain.Caption:='downloader - https://biotronics.eu/node/'+edtScriptNo.Text;
+      statusBar.SimpleText:='Downloaded from portal: https://biotronics.eu/node/'+edtScriptNo.Text;
     end;
 
   finally
@@ -123,6 +126,7 @@ end;
 procedure TfrmMain.btnUploadClick(Sender: TObject);
 begin
     if serial.Active then begin
+      memoConsole.Clear;
 
 
      //List existed script
@@ -136,6 +140,7 @@ end;
 procedure TfrmMain.FormCreate(Sender: TObject);
 var s: string;
 begin
+  readBuffer:='';
   s:=ApplicationName;
 
   if pos('(',s)>0 then
@@ -151,29 +156,34 @@ end;
 
 procedure TfrmMain.imgLogoClick(Sender: TObject);
 begin
-   OpenURL('https://biotronics.eu/node/'+edtScriptNo.Text);
+   OpenURL('https://biotronics.eu');
+end;
+
+procedure TfrmMain.labLinkTherapyClick(Sender: TObject);
+begin
+     OpenURL('https://biotronics.eu/node/'+edtScriptNo.Text);
 end;
 
 
 procedure TfrmMain.serialRxData(Sender: TObject);
-var s,ss: string;
+var s : string;
     i: integer;
 
 begin
 //Read data from serial port
-  sleep (100);
+  //sleep (100);
 
   s:= serial.ReadData;
 
-  ss:='';
-
   for i:=1 to Length(s) do
-     if (s[i]= #10) and (s[i-1]<> #13) then
-       ss := ss + #13#10
-     else
-       ss:=ss+s[i];
+     if (s[i]= #10)  then begin
+       //if (s[i-1]<> #13) then ss := ss + #13#10 else ss:=ss+#10;
+       memoConsole.Lines.Add(readBuffer);
+       readBuffer:='';
+     end else
+       readBuffer:=readBuffer+s[i];
 
-  memoConsole.Lines.Add(ss);
+
 
 end;
 
@@ -237,9 +247,10 @@ begin
      sleep(200);
 
 
-     for i:=0 to memoScript.Lines.Count do  begin
+     for i:=0 to memoScript.Lines.Count-1 do  begin
 
          serial.WriteData('mem @'#13#10);
+         sleep(20);
 
          s := memoScript.Lines[i];
          if (s<>'') and (s<>'@') then begin
