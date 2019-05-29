@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 370
-  Height = 596
-  Top = 149
+  Left = 298
+  Height = 652
+  Top = 143
   Width = 1034
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'downloader'
-  ClientHeight = 596
+  ClientHeight = 652
   ClientWidth = 1034
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
@@ -463,14 +463,14 @@ object frmMain: TfrmMain
     ClientHeight = 42
     ClientWidth = 1034
     TabOrder = 1
-    object btnConnect: TButton
+    object ButtonSerialConnect: TButton
       Left = 16
       Height = 25
       Hint = 'Connect to a device.'
       Top = 8
       Width = 75
       Caption = 'Connect'
-      OnClick = btnConnectClick
+      OnClick = ButtonSerialConnectClick
       TabOrder = 0
     end
     object btnDownload: TButton
@@ -485,17 +485,17 @@ object frmMain: TfrmMain
       ShowHint = True
       TabOrder = 1
     end
-    object btnReset: TButton
+    object ButtonSerialClose: TButton
       Left = 96
       Height = 25
       Top = 8
       Width = 40
-      Caption = 'Reset'
-      OnClick = btnResetClick
+      Caption = 'Close'
+      OnClick = ButtonSerialCloseClick
       TabOrder = 2
     end
     object btnLoad: TButton
-      Left = 764
+      Left = 633
       Height = 25
       Top = 8
       Width = 120
@@ -504,7 +504,7 @@ object frmMain: TfrmMain
       TabOrder = 3
     end
     object edtScriptNo: TEdit
-      Left = 710
+      Left = 579
       Height = 23
       Top = 10
       Width = 48
@@ -512,7 +512,7 @@ object frmMain: TfrmMain
       Text = '21'
     end
     object Label1: TLabel
-      Left = 595
+      Left = 464
       Height = 15
       Top = 13
       Width = 109
@@ -528,18 +528,9 @@ object frmMain: TfrmMain
       OnClick = btnUploadClick
       TabOrder = 5
     end
-    object btnRemove: TButton
-      Left = 432
-      Height = 25
-      Top = 8
-      Width = 128
-      Caption = 'Remove from device'
-      OnClick = btnRemoveClick
-      TabOrder = 6
-    end
     object labLinkTherapy: TLabel
       Cursor = crHandPoint
-      Left = 896
+      Left = 765
       Height = 15
       Top = 13
       Width = 70
@@ -554,58 +545,46 @@ object frmMain: TfrmMain
       ParentFont = False
       OnClick = labLinkTherapyClick
     end
-  end
-  object statusBar: TStatusBar
-    Left = 0
-    Height = 23
-    Top = 573
-    Width = 1034
-    Panels = <>
-  end
-  object Panel3: TPanel
-    Left = 914
-    Height = 401
-    Top = 172
-    Width = 120
-    Align = alRight
-    BevelOuter = bvNone
-    ClientHeight = 401
-    ClientWidth = 120
-    ParentColor = False
-    TabOrder = 3
     object btnSaveToFile: TButton
-      Left = 24
+      Left = 864
       Height = 25
       Top = 8
       Width = 75
       Caption = 'Save file...'
       OnClick = btnSaveToFileClick
-      TabOrder = 0
+      TabOrder = 6
     end
     object btnLoadFromFile: TButton
-      Left = 24
+      Left = 944
       Height = 25
-      Top = 56
+      Top = 8
       Width = 75
       Caption = 'Open file...'
       OnClick = btnLoadFromFileClick
-      TabOrder = 1
+      TabOrder = 7
     end
   end
+  object statusBar: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 629
+    Width = 1034
+    Panels = <>
+  end
   object Panel4: TPanel
-    Left = 494
-    Height = 401
+    Left = 504
+    Height = 457
     Top = 172
-    Width = 420
-    Align = alRight
-    ClientHeight = 401
-    ClientWidth = 420
-    TabOrder = 4
+    Width = 530
+    Align = alClient
+    ClientHeight = 457
+    ClientWidth = 530
+    TabOrder = 3
     object memoScript: TMemo
       Left = 1
-      Height = 399
+      Height = 455
       Top = 1
-      Width = 418
+      Width = 528
       Align = alClient
       Font.CharSet = EASTEUROPE_CHARSET
       Font.Color = clBlack
@@ -619,24 +598,141 @@ object frmMain: TfrmMain
       TabOrder = 0
     end
   end
-  object memoConsole: TMemo
+  object Panel5: TPanel
     Left = 0
-    Height = 401
+    Height = 457
     Top = 172
-    Width = 494
-    Align = alClient
-    Color = clBackground
-    Font.CharSet = EASTEUROPE_CHARSET
-    Font.Color = clLime
-    Font.Height = -16
-    Font.Name = 'Courier New'
-    Font.Pitch = fpFixed
-    Font.Quality = fqDraft
-    ParentFont = False
-    ReadOnly = True
-    ScrollBars = ssVertical
-    TabOrder = 5
-    WordWrap = False
+    Width = 504
+    Align = alLeft
+    BevelOuter = bvNone
+    Caption = 'Panel5'
+    ClientHeight = 457
+    ClientWidth = 504
+    TabOrder = 4
+    object memoConsole: TMemo
+      Left = 0
+      Height = 361
+      Top = 0
+      Width = 504
+      Align = alTop
+      Color = clBackground
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clLime
+      Font.Height = -16
+      Font.Name = 'Courier New'
+      Font.Pitch = fpFixed
+      Font.Quality = fqDraft
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 0
+      WordWrap = False
+    end
+    object EditExe1: TEdit
+      Left = 16
+      Height = 23
+      Top = 372
+      Width = 136
+      TabOrder = 1
+      Text = 'freq 1000 60'
+    end
+    object EditExe2: TEdit
+      Left = 16
+      Height = 23
+      Top = 400
+      Width = 136
+      TabOrder = 2
+      Text = 'out 1'
+    end
+    object EditExe3: TEdit
+      Left = 16
+      Height = 23
+      Top = 427
+      Width = 136
+      TabOrder = 3
+      Text = 'chp ~'
+    end
+    object ButtonExe1: TButton
+      Left = 160
+      Height = 23
+      Top = 372
+      Width = 56
+      Caption = 'Execute'
+      OnClick = ButtonExe1Click
+      TabOrder = 4
+    end
+    object ButtonExe2: TButton
+      Left = 160
+      Height = 23
+      Top = 400
+      Width = 56
+      Caption = 'Execute'
+      OnClick = ButtonExe1Click
+      TabOrder = 5
+    end
+    object ButtonExe3: TButton
+      Left = 160
+      Height = 23
+      Top = 427
+      Width = 56
+      Caption = 'Execute'
+      OnClick = ButtonExe1Click
+      TabOrder = 6
+    end
+    object ButtonRTCSync: TButton
+      Left = 368
+      Height = 23
+      Top = 372
+      Width = 115
+      Caption = 'RTC sync (settime)'
+      OnClick = ButtonRTCSyncClick
+      TabOrder = 7
+    end
+    object ButtonRTCSync1: TButton
+      Left = 368
+      Height = 23
+      Top = 427
+      Width = 115
+      Caption = 'Remove script (rm)'
+      OnClick = ButtonRTCSync1Click
+      TabOrder = 8
+    end
+    object ButtonRTCSync2: TButton
+      Left = 368
+      Height = 23
+      Top = 400
+      Width = 115
+      Caption = 'RTC time (gettime)'
+      OnClick = ButtonRTCSync2Click
+      TabOrder = 9
+    end
+    object ButtonRTCSync3: TButton
+      Left = 232
+      Height = 23
+      Top = 372
+      Width = 120
+      Caption = 'Turn off (off)'
+      OnClick = ButtonRTCSync3Click
+      TabOrder = 10
+    end
+    object ButtonReset: TButton
+      Left = 232
+      Height = 23
+      Top = 400
+      Width = 120
+      Caption = 'Reset device'
+      OnClick = ButtonResetClick
+      TabOrder = 11
+    end
+    object ButtonRTCSync5: TButton
+      Left = 232
+      Height = 23
+      Top = 427
+      Width = 120
+      Caption = 'List script (ls)'
+      OnClick = ButtonRTCSync5Click
+      TabOrder = 12
+    end
   end
   object serial: TLazSerial
     Active = False
