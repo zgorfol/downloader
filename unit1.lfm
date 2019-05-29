@@ -486,10 +486,10 @@ object frmMain: TfrmMain
       TabOrder = 1
     end
     object ButtonSerialClose: TButton
-      Left = 96
+      Left = 97
       Height = 25
       Top = 8
-      Width = 40
+      Width = 41
       Caption = 'Close'
       OnClick = ButtonSerialCloseClick
       TabOrder = 2
