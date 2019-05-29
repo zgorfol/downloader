@@ -13,14 +13,25 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
-    btnConnect: TButton;
-    btnDownload: TButton;
     btnLoadFromFile: TButton;
-    btnReset: TButton;
-    btnLoad: TButton;
     btnSaveToFile: TButton;
+    ButtonSerialConnect: TButton;
+    btnDownload: TButton;
+    ButtonSerialClose: TButton;
+    btnLoad: TButton;
     btnUpload: TButton;
-    btnRemove: TButton;
+    ButtonExe1: TButton;
+    ButtonExe2: TButton;
+    ButtonExe3: TButton;
+    ButtonRTCSync: TButton;
+    ButtonRTCSync1: TButton;
+    ButtonRTCSync2: TButton;
+    ButtonRTCSync3: TButton;
+    ButtonReset: TButton;
+    ButtonRTCSync5: TButton;
+    EditExe1: TEdit;
+    EditExe2: TEdit;
+    EditExe3: TEdit;
     edtScriptNo: TEdit;
     imgLogo: TImage;
     Label1: TLabel;
@@ -28,18 +39,25 @@ type
     memoConsole: TMemo;
     memoScript: TMemo;
     openDlg: TOpenDialog;
-    Panel3: TPanel;
     Panel4: TPanel;
+    Panel5: TPanel;
     saveDlg: TSaveDialog;
     serial: TLazSerial;
     Panel1: TPanel;
     Panel2: TPanel;
     statusBar: TStatusBar;
-    procedure btnConnectClick(Sender: TObject);
+    procedure ButtonExe1Click(Sender: TObject);
+    procedure ButtonResetClick(Sender: TObject);
+    procedure ButtonRTCSync1Click(Sender: TObject);
+    procedure ButtonRTCSync2Click(Sender: TObject);
+    procedure ButtonRTCSync3Click(Sender: TObject);
+    procedure ButtonRTCSync5Click(Sender: TObject);
+    procedure ButtonRTCSyncClick(Sender: TObject);
+    procedure ButtonSerialConnectClick(Sender: TObject);
     procedure btnDownloadClick(Sender: TObject);
     procedure btnLoadFromFileClick(Sender: TObject);
-    procedure btnRemoveClick(Sender: TObject);
-    procedure btnResetClick(Sender: TObject);
+
+    procedure ButtonSerialCloseClick(Sender: TObject);
     procedure btnLoadClick(Sender: TObject);
     procedure btnSaveToFileClick(Sender: TObject);
     procedure btnUploadClick(Sender: TObject);
@@ -64,19 +82,13 @@ implementation
 
 { TfrmMain }
 
-procedure TfrmMain.btnResetClick(Sender: TObject);
+
+
+procedure TfrmMain.ButtonSerialCloseClick(Sender: TObject);
 begin
+  serial.Close;
   memoConsole.Lines.Clear;
-
-  Sleep(2);
-
-  if serial.Active then begin
-     //DTR line is in Arduino boartds the reset of an ucontroller
-     serial.SetDTR(false);
-     Sleep(2);
-     serial.SetDTR(true);
-
-  end;
+  statusBar.SimpleText:='Serial port was closed.';
 end;
 
 procedure TfrmMain.btnLoadClick(Sender: TObject);
@@ -200,7 +212,7 @@ begin
   end;
 end; *)
 
-procedure TfrmMain.btnConnectClick(Sender: TObject);
+procedure TfrmMain.ButtonSerialConnectClick(Sender: TObject);
 var f : textFile;
     s: string;
 
@@ -230,6 +242,70 @@ begin
     end;
    CloseFile(f);
 
+end;
+
+procedure TfrmMain.ButtonExe1Click(Sender: TObject);
+var s : string;
+begin
+    if Sender = ButtonExe1 then begin s:=EditExe1.Text; end else
+    if Sender = ButtonExe2 then begin s:=EditExe2.Text; end else
+    if Sender = ButtonExe3 then begin s:=EditExe3.Text; end;
+
+    if (s<>'') and serial.Active then begin
+       serial.WriteData(Trim(s)+#13#10);
+       sleep(20);
+    end;
+end;
+
+procedure TfrmMain.ButtonResetClick(Sender: TObject);
+begin
+  if serial.Active then begin
+     //Clear terminal window
+     memoConsole.Lines.Clear;
+     readBuffer:='';
+
+     //DTR line is in Arduino boartds the reset of an ucontroller
+     serial.SetDTR(false);
+     Sleep(2);
+     serial.SetDTR(true);
+  end;
+end;
+
+procedure TfrmMain.ButtonRTCSync1Click(Sender: TObject);
+begin
+     if serial.Active then begin
+        serial.WriteData('rm'#13#10);
+     end;
+end;
+
+procedure TfrmMain.ButtonRTCSync2Click(Sender: TObject);
+begin
+     if serial.Active then begin
+        serial.WriteData('gettime'#13#10);
+     end;
+end;
+
+procedure TfrmMain.ButtonRTCSync3Click(Sender: TObject);
+begin
+     if serial.Active then begin
+        serial.WriteData('off'#13#10);
+     end;
+end;
+
+procedure TfrmMain.ButtonRTCSync5Click(Sender: TObject);
+begin
+     if serial.Active then begin
+        serial.WriteData('ls'#13#10);
+     end;
+end;
+
+procedure TfrmMain.ButtonRTCSyncClick(Sender: TObject);
+var s : string;
+begin
+     if serial.Active then begin
+        s:= FormatDateTime( 'hh nn ss',Now);
+        serial.WriteData('settime ' + s + #13#10);
+     end;
 end;
 
 procedure TfrmMain.btnDownloadClick(Sender: TObject);
@@ -275,16 +351,7 @@ begin
     memoScript.Lines.LoadFromFile(openDlg.FileName);
 end;
 
-procedure TfrmMain.btnRemoveClick(Sender: TObject);
-begin
 
-  if serial.Active then begin
-
-    //List remove script from device
-    serial.WriteData('rm'#13#10);
-
-  end;
-end;
 
 
 end.
