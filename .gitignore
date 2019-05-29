@@ -1,5 +1,5 @@
 # Uncomment these types if you want even more clean repository. But be careful.
-backup\
+
 # It can make harm to an existing project source. Read explanations below.
 #
 # Resource files are binaries containing manifest, project icon and version info.
@@ -59,6 +59,8 @@ backup\
 *.dsk
 
 # Delphi history and backups
+backup/
+lib/
 __history/
 __recovery/
 *.~*
@@ -68,3 +70,6 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+
+#git files
+.git*

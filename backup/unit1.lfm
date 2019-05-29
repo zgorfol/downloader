@@ -495,7 +495,7 @@ object frmMain: TfrmMain
       TabOrder = 2
     end
     object btnLoad: TButton
-      Left = 633
+      Left = 624
       Height = 25
       Top = 8
       Width = 120
@@ -504,19 +504,19 @@ object frmMain: TfrmMain
       TabOrder = 3
     end
     object edtScriptNo: TEdit
-      Left = 579
+      Left = 588
       Height = 23
       Top = 10
-      Width = 48
+      Width = 28
       TabOrder = 4
       Text = '21'
     end
     object Label1: TLabel
-      Left = 464
+      Left = 505
       Height = 15
       Top = 13
-      Width = 109
-      Caption = 'Node script number:'
+      Width = 77
+      Caption = 'Node number:'
       ParentColor = False
     end
     object btnUpload: TButton
@@ -530,7 +530,7 @@ object frmMain: TfrmMain
     end
     object labLinkTherapy: TLabel
       Cursor = crHandPoint
-      Left = 765
+      Left = 752
       Height = 15
       Top = 13
       Width = 70

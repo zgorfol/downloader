@@ -530,7 +530,7 @@ object frmMain: TfrmMain
     end
     object labLinkTherapy: TLabel
       Cursor = crHandPoint
-      Left = 752
+      Left = 760
       Height = 15
       Top = 13
       Width = 70
