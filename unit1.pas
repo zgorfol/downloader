@@ -326,7 +326,7 @@ begin
      for i:=0 to memoScript.Lines.Count-1 do  begin
 
          serial.WriteData('mem @'#13#10);
-         sleep(20);
+         sleep(30);
 
          s := memoScript.Lines[i];
          if (s<>'') and (s<>'@') then begin
@@ -336,7 +336,7 @@ begin
          serial.WriteData('@'#13#10);
          Application.ProcessMessages;
 
-         sleep(100);
+         sleep(180);
      end;
 
 
