@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 298
+  Left = 329
   Height = 652
-  Top = 143
+  Top = 158
   Width = 1034
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
@@ -474,7 +474,7 @@ object frmMain: TfrmMain
       TabOrder = 0
     end
     object btnDownload: TButton
-      Left = 160
+      Left = 216
       Height = 25
       Hint = 'Download therapy from Script tab window to a device.'
       Top = 8
@@ -495,7 +495,7 @@ object frmMain: TfrmMain
       TabOrder = 2
     end
     object btnLoad: TButton
-      Left = 624
+      Left = 631
       Height = 25
       Top = 8
       Width = 120
@@ -504,15 +504,16 @@ object frmMain: TfrmMain
       TabOrder = 3
     end
     object edtScriptNo: TEdit
-      Left = 588
+      Left = 595
       Height = 23
       Top = 10
       Width = 28
+      OnEditingDone = btnLoadClick
       TabOrder = 4
       Text = '21'
     end
     object Label1: TLabel
-      Left = 505
+      Left = 512
       Height = 15
       Top = 13
       Width = 77
@@ -520,7 +521,7 @@ object frmMain: TfrmMain
       ParentColor = False
     end
     object btnUpload: TButton
-      Left = 296
+      Left = 352
       Height = 25
       Top = 8
       Width = 131
@@ -530,7 +531,7 @@ object frmMain: TfrmMain
     end
     object labLinkTherapy: TLabel
       Cursor = crHandPoint
-      Left = 760
+      Left = 767
       Height = 15
       Top = 13
       Width = 70
@@ -634,7 +635,7 @@ object frmMain: TfrmMain
       Top = 372
       Width = 136
       TabOrder = 1
-      Text = 'freq 1000 60'
+      Text = 'freq 1000 30'
     end
     object EditExe2: TEdit
       Left = 16
@@ -741,26 +742,25 @@ object frmMain: TfrmMain
     Parity = pNone
     FlowControl = fcNone
     StopBits = sbOne
-    Device = 'COM1'
     RcvLineCRLF = False
     OnRxData = serialRxData
-    left = 816
-    top = 288
+    left = 656
+    top = 40
   end
   object openDlg: TOpenDialog
     Title = 'Open existing therapy script'
     DefaultExt = '.txt'
     Filter = 'txt|*.txt'
     Options = []
-    left = 840
-    top = 336
+    left = 768
+    top = 40
   end
   object saveDlg: TSaveDialog
     Title = 'Save file as therapy script'
     DefaultExt = '.txt'
     Filter = 'txt|*.txt'
     Options = []
-    left = 792
-    top = 336
+    left = 712
+    top = 40
   end
 end

@@ -61,12 +61,15 @@ type
     procedure btnLoadClick(Sender: TObject);
     procedure btnSaveToFileClick(Sender: TObject);
     procedure btnUploadClick(Sender: TObject);
+
     procedure FormCreate(Sender: TObject);
     procedure imgLogoClick(Sender: TObject);
     procedure labLinkTherapyClick(Sender: TObject);
     procedure serialRxData(Sender: TObject);
   private
     readBuffer :string;
+    LastPrompt: boolean;
+    UploadingFromDevice:boolean;
 
 
   public
@@ -87,7 +90,7 @@ implementation
 procedure TfrmMain.ButtonSerialCloseClick(Sender: TObject);
 begin
   serial.Close;
-  memoConsole.Lines.Clear;
+
   statusBar.SimpleText:='Serial port was closed.';
 end;
 
@@ -138,7 +141,8 @@ end;
 procedure TfrmMain.btnUploadClick(Sender: TObject);
 begin
     if serial.Active then begin
-      memoConsole.Clear;
+      memoScript.Clear;
+      UploadingFromDevice:=true;
 
 
      //List existed script
@@ -148,6 +152,10 @@ begin
 
 
 end;
+
+
+
+
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 var s: string;
@@ -187,13 +195,43 @@ begin
 
   s:= serial.ReadData;
 
-  for i:=1 to Length(s) do
-     if (s[i]= #10)  then begin
-       //if (s[i-1]<> #13) then ss := ss + #13#10 else ss:=ss+#10;
-       memoConsole.Lines.Add(readBuffer);
-       readBuffer:='';
-     end else
-       readBuffer:=readBuffer+s[i];
+  for i:=1 to Length(s) do begin
+
+      //Reset UploadingFromDevice mode after proompt obtained
+      if (s[i]='>') then UploadingFromDevice:=false;
+
+      if (s[i]=#10)  then begin
+
+        if LastPrompt then begin
+
+          LastPrompt:=false;
+          memoConsole.Lines.Delete(memoConsole.Lines.Count-1);
+          if UploadingFromDevice then memoScript.Lines.Delete(memoScript.Lines.Count-1);
+        end;
+
+         memoConsole.Lines.Add(readBuffer);
+         if UploadingFromDevice and (trim(readBuffer)<>'>ls') then memoScript.Lines.Add(readBuffer);
+         readBuffer:='';
+
+      end else
+         readBuffer:=readBuffer+s[i];
+
+  end;
+
+  if SizeOf(readBuffer) >0 then begin
+
+     if LastPrompt then begin
+
+       LastPrompt:=false;
+       memoConsole.Lines.Delete(memoConsole.Lines.Count-1);
+       if UploadingFromDevice then memoScript.Lines.Delete(memoScript.Lines.Count-1);
+     end;
+
+     memoConsole.Lines.Add(readBuffer);
+     if UploadingFromDevice then memoScript.Lines.Add(readBuffer);
+     LastPrompt:=true;
+
+  end;
 
 
 
@@ -219,15 +257,22 @@ var f : textFile;
 begin
   s:=ExtractFilePath(Application.ExeName)+'\downloader.port';
 
+  LastPrompt := false;
+  UploadingFromDevice:=false;
+
   AssignFile(f,s);
   {$I-}
   Reset(f);
-  {$I+}
+
   if IOResult=0 then  begin
      readln(f,s);
      serial.Device:=s;
-  //CloseFile(f);
+     readln(f,s);
+     if s='br__9600' then serial.BaudRate := br__9600 else
+     if s='br115200' then serial.BaudRate := br115200;
+
   end;
+  {$I+}
 
   serial.ShowSetupDialog;
   serial.Open;
@@ -236,8 +281,11 @@ begin
        Rewrite(f);
        {$I-}
        Writeln(f,serial.Device);
+       WriteLn(f,serial.BaudRate);
        {$I+}
 
+       memoConsole.Lines.Clear;
+       statusBar.SimpleText:='Serial port is open.';
 
     end;
    CloseFile(f);
@@ -247,9 +295,9 @@ end;
 procedure TfrmMain.ButtonExe1Click(Sender: TObject);
 var s : string;
 begin
-    if Sender = ButtonExe1 then begin s:=EditExe1.Text; end else
-    if Sender = ButtonExe2 then begin s:=EditExe2.Text; end else
-    if Sender = ButtonExe3 then begin s:=EditExe3.Text; end;
+    if (Sender = ButtonExe1) or (Sender = EditExe1) then begin s:=EditExe1.Text; end else
+    if (Sender = ButtonExe2) or (Sender = EditExe2) then begin s:=EditExe2.Text; end else
+    if (Sender = ButtonExe3) or (Sender = EditExe3) then begin s:=EditExe3.Text; end;
 
     if (s<>'') and serial.Active then begin
        serial.WriteData(Trim(s)+#13#10);
@@ -263,6 +311,7 @@ begin
      //Clear terminal window
      memoConsole.Lines.Clear;
      readBuffer:='';
+     LastPrompt:=false;
 
      //DTR line is in Arduino boartds the reset of an ucontroller
      serial.SetDTR(false);
