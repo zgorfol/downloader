@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  ComCtrls, LazSerial, HTTPSend, lclintf;
+  ComCtrls, LazSerial, (*HTTPSend,*) lclintf,  fphttpclient, fpjson, jsonparser,Windows;
 
 type
 
@@ -32,7 +32,7 @@ type
     EditExe1: TEdit;
     EditExe2: TEdit;
     EditExe3: TEdit;
-    edtScriptNo: TEdit;
+    EditScriptNo: TEdit;
     imgLogo: TImage;
     Label1: TLabel;
     labLinkTherapy: TLabel;
@@ -46,6 +46,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     statusBar: TStatusBar;
+
     procedure ButtonExe1Click(Sender: TObject);
     procedure ButtonResetClick(Sender: TObject);
     procedure ButtonRTCSync1Click(Sender: TObject);
@@ -66,6 +67,8 @@ type
     procedure imgLogoClick(Sender: TObject);
     procedure labLinkTherapyClick(Sender: TObject);
     procedure serialRxData(Sender: TObject);
+
+    procedure CreateDllLibraries();
   private
     readBuffer :string;
     LastPrompt: boolean;
@@ -95,23 +98,55 @@ begin
 end;
 
 procedure TfrmMain.btnLoadClick(Sender: TObject);
+var
+  Http: TFPHttpClient;
+  Content : string;
+  Json : TJSONData;
+  i    : integer;
 
+begin
+  Http:=TFPHttpClient.Create(Nil);
+  memoScript.Lines.Clear;
+  try
+     CreateDllLibraries();
+     Content:=Http.Get('https://biotronics.eu/terapie_list?_format=json'); //  this is just an example data
+     JSON:=GetJSON(Content);
+     try
+        for i:= 0 to Json.Count-1 do begin
+          if Json.FindPath('['+IntToStr(i)+'].nid[0].value').AsString = EditScriptNo.Text then begin
+              statusBar.SimpleText:=Json.FindPath('['+IntToStr(i)+'].title[0].value').AsString;
+              memoScript.Lines.Add(Json.FindPath('['+IntToStr(i)+'].field_skrypt[0].value').AsString);
+              Content:='';
+              Break;
+
+          end;
+        end;
+
+     finally
+       JSON.Free;
+     end;
+  finally
+    Http.Free;
+  end;
+end;
+(*
 var
   httpClient: THTTPSend;
   strm: TFileStream;
   //l: longint;
 begin
 
+
   try
     httpClient:= THTTPSend.Create;
     strm := TFileStream.Create('mystream', fmCreate or fmOpenReadWrite);
 
-    if httpClient.HTTPMethod('GET', 'http://biotronika.pl/downloader.php?nodeid='+edtScriptNo.Text) then  begin
+    if httpClient.HTTPMethod('GET', 'https://biotronika.pl/downloader.php?nodeid='+EditScriptNo.Text) then  begin
       httpClient.Document.SaveToStream(strm);
       strm.Position:=0;
       memoScript.Lines.LoadFromStream(strm);
-      //frmMain.Caption:='downloader - https://biotronics.eu/node/'+edtScriptNo.Text;
-      statusBar.SimpleText:='Downloaded from portal: https://biotronics.eu/node/'+edtScriptNo.Text;
+      //frmMain.Caption:='downloader - https://biotronics.eu/node/'+EditScriptNo.Text;
+      statusBar.SimpleText:='Downloaded from portal: https://biotronics.eu/node/'+EditScriptNo.Text;
     end;
 
   finally
@@ -120,6 +155,7 @@ begin
   end;
 
 end;
+*)
 
 procedure TfrmMain.btnSaveToFileClick(Sender: TObject);
 var s:string;
@@ -167,7 +203,7 @@ begin
     s:= trim(LeftStr(s,pos('(',s)-1));
 
   if StrToIntDef(s,0)>0 then begin
-     edtScriptNo.Text:=s;
+     EditScriptNo.Text:=s;
      frmMain.btnLoadClick(Sender);
 
 
@@ -181,7 +217,7 @@ end;
 
 procedure TfrmMain.labLinkTherapyClick(Sender: TObject);
 begin
-     OpenURL('https://biotronics.eu/node/'+edtScriptNo.Text);
+     OpenURL('https://biotronics.eu/node/'+EditScriptNo.Text);
 end;
 
 
@@ -303,6 +339,37 @@ begin
        serial.WriteData(Trim(s)+#13#10);
        sleep(20);
     end;
+end;
+
+procedure TfrmMain.CreateDllLibraries();
+var
+  AppFolder: string;
+  ResStream: TResourceStream;
+begin
+  AppFolder := ExtractFilePath(Application.ExeName);
+
+  if not FileExists(AppFolder+'libeay32.dll') then begin
+    try
+      ResStream := TResourceStream.Create(HInstance, 'LIBEAY32', RT_RCDATA);
+      ResStream.Position := 0;
+      ResStream.SaveToFile(AppFolder+'libeay32.dll');
+
+    finally
+      ResStream.Free;
+    end;
+  end;
+
+  if not FileExists(AppFolder+'ssleay32.dll') then begin
+    try
+      ResStream := TResourceStream.Create(HInstance, 'SSLEAY32', RT_RCDATA);
+      ResStream.Position := 0;
+      ResStream.SaveToFile(AppFolder+'ssleay32.dll');
+
+    finally
+      ResStream.Free;
+    end;
+  end;
+
 end;
 
 procedure TfrmMain.ButtonResetClick(Sender: TObject);

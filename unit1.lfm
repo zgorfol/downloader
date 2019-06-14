@@ -1,10 +1,9 @@
 object frmMain: TfrmMain
-  Left = 329
+  Left = 419
   Height = 652
-  Top = 158
+  Top = 180
   Width = 1034
   BorderIcons = [biSystemMenu, biMinimize]
-  BorderStyle = bsSingle
   Caption = 'downloader'
   ClientHeight = 652
   ClientWidth = 1034
@@ -503,7 +502,7 @@ object frmMain: TfrmMain
       OnClick = btnLoadClick
       TabOrder = 3
     end
-    object edtScriptNo: TEdit
+    object EditScriptNo: TEdit
       Left = 595
       Height = 23
       Top = 10
@@ -742,6 +741,7 @@ object frmMain: TfrmMain
     Parity = pNone
     FlowControl = fcNone
     StopBits = sbOne
+    Device = 'COM1'
     RcvLineCRLF = False
     OnRxData = serialRxData
     left = 656
