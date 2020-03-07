@@ -76,6 +76,7 @@ type
 
 
   public
+    const VERSION ='2020-03-07';
 
   end;
 
@@ -196,6 +197,8 @@ end;
 procedure TfrmMain.FormCreate(Sender: TObject);
 var s: string;
 begin
+
+  Self.Caption:='downloader '+VERSION;
   readBuffer:='';
   s:=ApplicationName;
 
