@@ -16,10 +16,6 @@
         <TextDesc Value="The best things are for free: mother Earth, Linux, nature, love..."/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="2">
-        <Resource_0 FileName="libeay32.dll" Type="RCDATA" ResourceName="LIBEAY32"/>
-        <Resource_1 FileName="ssleay32.dll" Type="RCDATA" ResourceName="SSLEAY32"/>
-      </Resources>
     </General>
     <BuildModes Count="1">
       <Item1 Name="Default" Default="True"/>
