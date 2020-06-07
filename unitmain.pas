@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  ComCtrls, LazSerial,  lclintf,  fphttpclient, fpjson, jsonparser;
+  ComCtrls, LazSerial,  lclintf,  fphttpclient, fpjson, jsonparser, myFunctions, unitChooseTherapy;
 
 type
 
@@ -32,9 +32,7 @@ type
     EditExe1: TEdit;
     EditExe2: TEdit;
     EditExe3: TEdit;
-    EditScriptNo: TEdit;
     imgLogo: TImage;
-    Label1: TLabel;
     labLinkTherapy: TLabel;
     memoConsole: TMemo;
     memoScript: TMemo;
@@ -76,7 +74,9 @@ type
 
 
   public
-    const VERSION ='2020-06-06 (alpha)';
+    const VERSION = SOFTWARE_VERSION;
+    var
+        CurrentTherapyURL : string;
 
   end;
 
@@ -100,35 +100,27 @@ end;
 
 procedure TfrmMain.btnLoadClick(Sender: TObject);
 var
-  Http: TFPHttpClient;
-  Content : string;
-  Json : TJSONData;
-  i    : integer;
+
+  BioresonanceTherapy :  TBioresonanceTherapy;
 
 begin
-  Http:=TFPHttpClient.Create(Nil);
-  memoScript.Lines.Clear;
+
+  Screen.Cursor := crHourGlass;
+  Application.ProcessMessages;
+
   try
 
-     Content:=Http.Get('https://biotronics.eu/terapie_list?_format=json'); //  this is just an example data
-     JSON:=GetJSON(Content);
-     try
-        for i:= 0 to Json.Count-1 do begin
-          if Json.FindPath('['+IntToStr(i)+'].nid[0].value').AsString = EditScriptNo.Text then begin
-              statusBar.SimpleText:=Json.FindPath('['+IntToStr(i)+'].title[0].value').AsString;
-              memoScript.Lines.Add(Json.FindPath('['+IntToStr(i)+'].field_skrypt[0].value').AsString);
-              Content:='';
-              Break;
+   memoScript.Lines.Clear;
+   BioresonanceTherapy  := FormChooseTherapy.Choose('');
 
-          end;
-        end;
+   memoScript.Lines.Add ( BioresonanceTherapy.TherapyScript );
+   statusBar.SimpleText := BioresonanceTherapy.Devices + ' : ' + BioresonanceTherapy.Name;
+   CurrentTherapyURL    := BioresonanceTherapy.Url;
 
-     finally
-       JSON.Free;
-     end;
   finally
-    Http.Free;
+    Screen.Cursor := crDefault;
   end;
+
 end;
 
 
@@ -174,17 +166,24 @@ begin
 
   Self.Caption:='downloader '+VERSION;
   readBuffer:='';
+
+  CurrentTherapyURL := PAGE_URL + '/bioresonance-therapies';
+
+(*
   s:=ApplicationName;
+
+
 
   if pos('(',s)>0 then
     s:= trim(LeftStr(s,pos('(',s)-1));
 
   if StrToIntDef(s,0)>0 then begin
-     EditScriptNo.Text:=s;
-     frmMain.btnLoadClick(Sender);
+     //EditScriptNo.Text:=s;
+     //frmMain.btnLoadClick(Sender);
 
 
   end;
+  *)
 end;
 
 procedure TfrmMain.imgLogoClick(Sender: TObject);
@@ -194,7 +193,7 @@ end;
 
 procedure TfrmMain.labLinkTherapyClick(Sender: TObject);
 begin
-     OpenURL('https://biotronics.eu/node/'+EditScriptNo.Text);
+     OpenURL(CurrentTherapyURL);
 end;
 
 

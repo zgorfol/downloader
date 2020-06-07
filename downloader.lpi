@@ -28,15 +28,18 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="2">
+    <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="LazSerialPort"/>
+        <PackageName Value="laz_synapse"/>
       </Item1>
       <Item2>
-        <PackageName Value="LCL"/>
+        <PackageName Value="LazSerialPort"/>
       </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="5">
       <Unit0>
         <Filename Value="downloader.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -54,6 +57,18 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="unitDownload"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="unitchoosetherapy.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormChooseTherapy"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="myfunctions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="myFunctions"/>
+      </Unit4>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
