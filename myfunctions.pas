@@ -15,7 +15,7 @@ uses
   Classes, SysUtils, StrUtils, Forms, LCLIntf, HTTPSend, fphttpclient, fpjson, jsonparser, unitDownload;
 
 const
-  SOFTWARE_VERSION = '2020-06-07 (beta)';
+  SOFTWARE_VERSION = '2020-06-08 (alpha)';
 
   PAGE_URL    = 'https://biotronics.eu';
   PAGE_URL_PL = 'https://biotronika.pl';
@@ -58,7 +58,7 @@ type TBioresonanceTherapy = record
      Name : string;
      Description : string;
      TherapyScript : string;
-     Devices : string;   //freePEMF, multiZAP etc.
+     Devices : string;   //freePEMF multiZAP etc.
      Url : string;
      Langcode : string;
 end;

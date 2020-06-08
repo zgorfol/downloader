@@ -82,6 +82,10 @@
       <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1\"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <CodeGeneration>
+      <TargetCPU Value="i386"/>
+      <TargetOS Value="win32"/>
+    </CodeGeneration>
     <Linking>
       <Debugging>
         <GenerateDebugInfo Value="False"/>
