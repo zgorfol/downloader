@@ -1,41 +1,42 @@
 object FormChooseTherapy: TFormChooseTherapy
-  Left = 615
-  Height = 502
-  Top = 411
-  Width = 977
+  Left = 593
+  Height = 402
+  Top = 296
+  Width = 782
   BorderStyle = bsToolWindow
   Caption = 'Search Bioresonance Therapy'
-  ClientHeight = 502
-  ClientWidth = 977
-  DesignTimePPI = 120
+  ClientHeight = 402
+  ClientWidth = 782
   FormStyle = fsStayOnTop
   OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '2.0.6.0'
   object Panel1: TPanel
     Left = 0
-    Height = 128
+    Height = 102
     Top = 0
-    Width = 977
+    Width = 782
     Align = alTop
-    ClientHeight = 128
-    ClientWidth = 977
+    ClientHeight = 102
+    ClientWidth = 782
+    ParentFont = False
     TabOrder = 0
     object ButtonSearch: TButton
-      Left = 488
-      Height = 53
-      Top = 24
-      Width = 144
+      Left = 390
+      Height = 42
+      Top = 19
+      Width = 115
       Caption = 'Search'
       OnClick = ButtonSearchClick
+      ParentFont = False
       TabOrder = 0
     end
     object EditSearchString: TEdit
-      Left = 112
-      Height = 53
-      Top = 22
-      Width = 352
-      Font.Height = -33
+      Left = 90
+      Height = 38
+      Top = 18
+      Width = 282
+      Font.Height = -26
       OnChange = EditSearchStringChange
       OnKeyPress = EditSearchStringKeyPress
       ParentFont = False
@@ -43,35 +44,36 @@ object FormChooseTherapy: TFormChooseTherapy
     end
     object Panel2: TPanel
       Left = 1
-      Height = 26
-      Top = 101
-      Width = 975
+      Height = 21
+      Top = 80
+      Width = 780
       Align = alBottom
       Caption = 'Panel2'
-      ClientHeight = 26
-      ClientWidth = 975
+      ClientHeight = 21
+      ClientWidth = 780
+      ParentFont = False
       TabOrder = 2
       object Shape3: TShape
         Left = 1
-        Height = 24
+        Height = 19
         Top = 1
-        Width = 973
+        Width = 778
         Align = alClient
         Brush.Color = 8454016
         Pen.Style = psDash
       end
       object Label24: TLabel
         Left = 1
-        Height = 24
+        Height = 19
         Top = 1
-        Width = 973
+        Width = 778
         Align = alClient
         Alignment = taCenter
         AutoSize = False
         Caption = 'Write any text and prees ENTER to search therapies. Use pager to see more than 20 results.'
         Font.CharSet = EASTEUROPE_CHARSET
         Font.Color = clGreen
-        Font.Height = -17
+        Font.Height = -14
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
         Font.Quality = fqDraft
@@ -82,10 +84,10 @@ object FormChooseTherapy: TFormChooseTherapy
     end
     object ImageNext: TImage
       Cursor = crHandPoint
-      Left = 921
-      Height = 48
-      Top = 27
-      Width = 44
+      Left = 737
+      Height = 38
+      Top = 18
+      Width = 35
       Anchors = [akRight]
       DragCursor = crHandPoint
       OnClick = ImageNextClick
@@ -137,10 +139,10 @@ object FormChooseTherapy: TFormChooseTherapy
     end
     object ImageBack: TImage
       Cursor = crHandPoint
-      Left = 829
-      Height = 48
-      Top = 27
-      Width = 43
+      Left = 664
+      Height = 38
+      Top = 18
+      Width = 34
       Anchors = [akRight]
       DragCursor = crHandPoint
       OnClick = ImageBackClick
@@ -199,19 +201,20 @@ object FormChooseTherapy: TFormChooseTherapy
       Stretch = True
     end
     object ButtonChoose: TButton
-      Left = 664
-      Height = 53
-      Top = 24
-      Width = 136
+      Left = 531
+      Height = 42
+      Top = 19
+      Width = 109
       Caption = 'Choose && Close'
       OnClick = ButtonChooseClick
+      ParentFont = False
       TabOrder = 3
     end
     object Label1: TLabel
-      Left = 868
-      Height = 20
-      Top = 24
-      Width = 56
+      Left = 695
+      Height = 16
+      Top = 19
+      Width = 45
       Alignment = taCenter
       Anchors = [akTop, akRight]
       AutoSize = False
@@ -222,58 +225,60 @@ object FormChooseTherapy: TFormChooseTherapy
       ParentFont = False
     end
     object LabelPage: TLabel
-      Left = 869
-      Height = 31
-      Top = 40
-      Width = 56
+      Left = 695
+      Height = 25
+      Top = 29
+      Width = 45
       Alignment = taCenter
       Anchors = [akRight]
       AutoSize = False
       BidiMode = bdRightToLeftReadingOnly
       Caption = '0'
       Font.Color = 12615680
-      Font.Height = -23
+      Font.Height = -18
       Font.Style = [fsBold]
       ParentBidiMode = False
       ParentColor = False
       ParentFont = False
     end
     object ComboBoxLanguage: TComboBox
-      Left = 32
-      Height = 28
-      Top = 47
-      Width = 72
-      ItemHeight = 20
+      Left = 26
+      Height = 26
+      Top = 38
+      Width = 58
+      ItemHeight = 0
       ItemIndex = 0
       Items.Strings = (
         'All'
         'en'
         'pl'
       )
+      ParentFont = False
       TabOrder = 4
       Text = 'All'
     end
     object Label2: TLabel
-      Left = 32
-      Height = 20
-      Top = 22
-      Width = 68
+      Left = 26
+      Height = 15
+      Top = 18
+      Width = 67
       Caption = 'Language:'
       ParentColor = False
+      ParentFont = False
     end
   end
   object StringGrid: TStringGrid
     Left = 0
-    Height = 374
-    Top = 128
-    Width = 977
+    Height = 300
+    Top = 102
+    Width = 782
     Align = alClient
     AutoEdit = False
     ColCount = 3
     FixedCols = 0
     Font.CharSet = EASTEUROPE_CHARSET
     Font.Color = clBlack
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
@@ -291,9 +296,9 @@ object FormChooseTherapy: TFormChooseTherapy
     TitleFont.Style = [fsBold]
     OnDblClick = ButtonChooseClick
     ColWidths = (
-      357
-      347
-      254
+      286
+      278
+      203
     )
     Cells = (
       3

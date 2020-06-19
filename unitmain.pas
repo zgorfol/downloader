@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  ComCtrls, LazSerial,  lclintf,  fphttpclient, fpjson, jsonparser, myFunctions, unitChooseTherapy;
+  ComCtrls, LazSerial,  lclintf,  fphttpclient, fpjson, jsonparser, bioFunctions,bioRest , unitChooseTherapy;
 
 type
 
@@ -167,7 +167,7 @@ begin
   Self.Caption:='downloader '+VERSION;
   readBuffer:='';
 
-  CurrentTherapyURL := PAGE_URL + '/bioresonance-therapies';
+  CurrentTherapyURL := PAGE_URL_EN + '/bioresonance-therapies';
 
 (*
   s:=ApplicationName;

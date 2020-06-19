@@ -17,8 +17,81 @@
       </XPManifest>
       <Icon Value="0"/>
     </General>
-    <BuildModes Count="1">
+    <BuildModes Count="4">
       <Item1 Name="Default" Default="True"/>
+      <Item2 Name="Win64 debug">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="bin\$(TargetOS)\downloader"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Linking>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+        </CompilerOptions>
+      </Item2>
+      <Item3 Name="Win64">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="bin\$(TargetOS)\downloader"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+        </CompilerOptions>
+      </Item3>
+      <Item4 Name="Win32">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="bin\$(TargetOS)\downloader"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <TargetCPU Value="i386"/>
+            <TargetOS Value="win32"/>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+        </CompilerOptions>
+      </Item4>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -53,21 +126,21 @@
         <UnitName Value="unitMain"/>
       </Unit1>
       <Unit2>
-        <Filename Value="unitdownload.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="unitDownload"/>
-      </Unit2>
-      <Unit3>
         <Filename Value="unitchoosetherapy.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FormChooseTherapy"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="biofunctions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="bioFunctions"/>
       </Unit3>
       <Unit4>
-        <Filename Value="myfunctions.pas"/>
+        <Filename Value="biorest.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="myFunctions"/>
+        <UnitName Value="bioREST"/>
       </Unit4>
     </Units>
   </ProjectOptions>
@@ -79,13 +152,9 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1\"/>
+      <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
-    <CodeGeneration>
-      <TargetCPU Value="i386"/>
-      <TargetOS Value="win32"/>
-    </CodeGeneration>
     <Linking>
       <Debugging>
         <GenerateDebugInfo Value="False"/>

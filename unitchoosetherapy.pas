@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  Grids, myFunctions;
+  Grids, bioFunctions,bioRest;
 
 type
 
@@ -81,6 +81,8 @@ var content : string;
           s : string;
 begin
 
+  content := '';
+
   F_Therapy.Name:='Unknow';
   //setlength(F_Therapy.Points,0);
   F_Therapy.Devices:='';
@@ -91,7 +93,7 @@ begin
   s:= s+ '&langcode='+trim(ComboBoxLanguage.Text);
   if F_Page > 0 then s := s + '&page=' + IntToStr(F_Page);
 
-  GetContentFromREST(content,  LISTS_DEF[LIST_BIORESONANCE_THERAPY].RestURL , s );
+  GetContentFromREST(content,  LIST_REST_URLS[LIST_BIORESONANCE_THERAPY] , s);
   GetBioresonanceTherapiesFromContent( content, F_Therapies);
   FillGridOfTherapies(F_Therapies);
 
