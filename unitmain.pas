@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  ComCtrls, LazSerial,  lclintf,  fphttpclient, fpjson, jsonparser, bioFunctions,bioRest , unitChooseTherapy;
+  ComCtrls, LazSerial,  lclintf,  fphttpclient, fpjson, jsonparser, bioFunctions,bioRest , unitChooseList;
 
 type
 
@@ -62,9 +62,11 @@ type
     procedure btnUploadClick(Sender: TObject);
 
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure imgLogoClick(Sender: TObject);
     procedure labLinkTherapyClick(Sender: TObject);
     procedure serialRxData(Sender: TObject);
+    function  GetNidFromName():string;
 
 
   private
@@ -78,6 +80,8 @@ type
     var
         CurrentTherapyURL : string;
 
+
+
   end;
 
 var
@@ -89,6 +93,29 @@ implementation
 
 { TfrmMain }
 
+function TfrmMain.GetNidFromName():string;
+(* elektros 2020-06-21
+ * Function return Nid of therapy from Windows application name, otherwise return empty string
+ *)
+var s : string;
+    i : integer;
+
+begin
+
+  result := '';
+
+{$IFDEF WINDOWS}
+  s := ApplicationName;
+
+  //Remove parts like (1) (2) added by web browser if file is in download folder
+  if pos('(',s)>0 then s:= trim(LeftStr(s,pos('(',s)-1));
+
+  i := StrToIntDef(s,0);
+
+  if i > 0 then  result := IntToStr(i);
+{$ENDIF}
+
+end;
 
 
 procedure TfrmMain.ButtonSerialCloseClick(Sender: TObject);
@@ -105,21 +132,21 @@ var
 
 begin
 
-  Screen.Cursor := crHourGlass;
-  Application.ProcessMessages;
+  //Screen.Cursor := crHourGlass;
+  //Application.ProcessMessages;
 
-  try
+  //try
 
    memoScript.Lines.Clear;
-   BioresonanceTherapy  := FormChooseTherapy.Choose('');
+   FormChooseList.GetItemFromList( BioresonanceTherapy,'','en') ;//FormChooseTherapy.Choose('');
 
    memoScript.Lines.Add ( BioresonanceTherapy.TherapyScript );
    statusBar.SimpleText := BioresonanceTherapy.Devices + ' : ' + BioresonanceTherapy.Name;
    CurrentTherapyURL    := BioresonanceTherapy.Url;
 
-  finally
-    Screen.Cursor := crDefault;
-  end;
+ // finally
+    //Screen.Cursor := crDefault;
+ // end;
 
 end;
 
@@ -164,26 +191,40 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 var s: string;
 begin
 
-  Self.Caption:='downloader '+VERSION;
+  Caption:='downloader';
   readBuffer:='';
 
+  Serial.Device := FIRST_SERIAL_PORT;
+
   CurrentTherapyURL := PAGE_URL_EN + '/bioresonance-therapies';
+  statusBar.SimpleText := 'Software ver.: ' + SOFTWARE_VERSION + '   Compilation: ' + OS_VERSION;
+end;
 
-(*
-  s:=ApplicationName;
+procedure TfrmMain.FormShow(Sender: TObject);
+var nid : string;
+    Items :  TBioresonanceTherapies;
+    content : string;
+begin
 
+  nid := GetNidFromName();
 
+  if nid<>'' then begin
+     memoScript.Lines.Clear;
 
-  if pos('(',s)>0 then
-    s:= trim(LeftStr(s,pos('(',s)-1));
+     GetContentFromREST( content, LIST_REST_URLS[LIST_BIORESONANCE_THERAPY],'', nid + '+');
+     GetBioresonanceTherapiesFromContent(content, Items);
 
-  if StrToIntDef(s,0)>0 then begin
-     //EditScriptNo.Text:=s;
-     //frmMain.btnLoadClick(Sender);
+     if length(Items)>0 then begin
 
+         memoScript.Lines.Add ( Items[0].TherapyScript );
+         statusBar.SimpleText := Items[0].Devices + ' : ' + Items[0].Name;
+         CurrentTherapyURL    := Items[0].Url;
+
+     end;
 
   end;
-  *)
+
+
 end;
 
 procedure TfrmMain.imgLogoClick(Sender: TObject);

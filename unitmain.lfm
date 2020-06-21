@@ -1,33 +1,33 @@
 object frmMain: TfrmMain
-  Left = 350
-  Height = 791
-  Top = 177
-  Width = 1292
+  Left = 543
+  Height = 633
+  Top = 210
+  Width = 1034
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'downloader'
-  ClientHeight = 791
-  ClientWidth = 1292
-  DesignTimePPI = 120
+  ClientHeight = 633
+  ClientWidth = 1034
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
+  OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '2.0.6.0'
   object Panel1: TPanel
     Left = 0
-    Height = 130
+    Height = 104
     Top = 0
-    Width = 1292
+    Width = 1034
     Align = alTop
-    ClientHeight = 130
-    ClientWidth = 1292
+    ClientHeight = 104
+    ClientWidth = 1034
     ParentFont = False
     TabOrder = 0
     object imgLogo: TImage
       Cursor = crHandPoint
       Left = 1
-      Height = 128
+      Height = 102
       Top = 1
-      Width = 1290
+      Width = 1032
       Align = alClient
       OnClick = imgLogoClick
       Picture.Data = {
@@ -456,32 +456,32 @@ object frmMain: TfrmMain
   end
   object Panel2: TPanel
     Left = 0
-    Height = 52
-    Top = 130
-    Width = 1292
+    Height = 42
+    Top = 104
+    Width = 1034
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 52
-    ClientWidth = 1292
+    ClientHeight = 42
+    ClientWidth = 1034
     ParentFont = False
     TabOrder = 1
     object ButtonSerialConnect: TButton
-      Left = 20
-      Height = 31
+      Left = 16
+      Height = 25
       Hint = 'Connect to a device.'
-      Top = 10
-      Width = 94
+      Top = 8
+      Width = 75
       Caption = 'Connect'
       OnClick = ButtonSerialConnectClick
       ParentFont = False
       TabOrder = 0
     end
     object btnDownload: TButton
-      Left = 270
-      Height = 31
+      Left = 216
+      Height = 25
       Hint = 'Download therapy from Script tab window to a device.'
-      Top = 10
-      Width = 160
+      Top = 8
+      Width = 128
       Caption = 'Download to device'
       OnClick = btnDownloadClick
       ParentFont = False
@@ -490,30 +490,30 @@ object frmMain: TfrmMain
       TabOrder = 1
     end
     object ButtonSerialClose: TButton
-      Left = 121
-      Height = 31
-      Top = 10
-      Width = 51
+      Left = 97
+      Height = 25
+      Top = 8
+      Width = 41
       Caption = 'Close'
       OnClick = ButtonSerialCloseClick
       ParentFont = False
       TabOrder = 2
     end
     object btnLoad: TButton
-      Left = 648
-      Height = 31
-      Top = 10
-      Width = 150
+      Left = 518
+      Height = 25
+      Top = 8
+      Width = 120
       Caption = 'Load from portal'
       OnClick = btnLoadClick
       ParentFont = False
       TabOrder = 3
     end
     object btnUpload: TButton
-      Left = 440
-      Height = 31
-      Top = 10
-      Width = 164
+      Left = 352
+      Height = 25
+      Top = 8
+      Width = 131
       Caption = 'Upload from device'
       OnClick = btnUploadClick
       ParentFont = False
@@ -521,14 +521,14 @@ object frmMain: TfrmMain
     end
     object labLinkTherapy: TLabel
       Cursor = crHandPoint
-      Left = 808
-      Height = 20
-      Top = 16
-      Width = 87
+      Left = 646
+      Height = 13
+      Top = 13
+      Width = 83
       Caption = 'See therapy...'
       Font.CharSet = EASTEUROPE_CHARSET
       Font.Color = clNavy
-      Font.Height = -15
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Pitch = fpVariable
       Font.Quality = fqDraft
@@ -537,20 +537,20 @@ object frmMain: TfrmMain
       OnClick = labLinkTherapyClick
     end
     object btnSaveToFile: TButton
-      Left = 1080
-      Height = 31
-      Top = 10
-      Width = 94
+      Left = 864
+      Height = 25
+      Top = 8
+      Width = 75
       Caption = 'Save file...'
       OnClick = btnSaveToFileClick
       ParentFont = False
       TabOrder = 5
     end
     object btnLoadFromFile: TButton
-      Left = 1180
-      Height = 31
-      Top = 10
-      Width = 94
+      Left = 944
+      Height = 25
+      Top = 8
+      Width = 75
       Caption = 'Open file...'
       OnClick = btnLoadFromFileClick
       ParentFont = False
@@ -559,31 +559,31 @@ object frmMain: TfrmMain
   end
   object statusBar: TStatusBar
     Left = 0
-    Height = 29
-    Top = 762
-    Width = 1292
+    Height = 20
+    Top = 613
+    Width = 1034
     Panels = <>
     ParentFont = False
   end
   object Panel4: TPanel
-    Left = 630
-    Height = 580
-    Top = 182
-    Width = 662
+    Left = 504
+    Height = 467
+    Top = 146
+    Width = 530
     Align = alClient
-    ClientHeight = 580
-    ClientWidth = 662
+    ClientHeight = 467
+    ClientWidth = 530
     ParentFont = False
     TabOrder = 3
     object memoScript: TMemo
       Left = 1
-      Height = 578
+      Height = 465
       Top = 1
-      Width = 660
+      Width = 528
       Align = alClient
       Font.CharSet = EASTEUROPE_CHARSET
       Font.Color = clBlack
-      Font.Height = -20
+      Font.Height = -16
       Font.Name = 'Courier New'
       Font.Pitch = fpFixed
       Font.Quality = fqDraft
@@ -595,26 +595,26 @@ object frmMain: TfrmMain
   end
   object Panel5: TPanel
     Left = 0
-    Height = 580
-    Top = 182
-    Width = 630
+    Height = 467
+    Top = 146
+    Width = 504
     Align = alLeft
     BevelOuter = bvNone
     Caption = 'Panel5'
-    ClientHeight = 580
-    ClientWidth = 630
+    ClientHeight = 467
+    ClientWidth = 504
     ParentFont = False
     TabOrder = 4
     object memoConsole: TMemo
       Left = 0
-      Height = 451
+      Height = 361
       Top = 0
-      Width = 630
+      Width = 504
       Align = alTop
-      Color = clBackground
+      Color = clBlack
       Font.CharSet = EASTEUROPE_CHARSET
       Font.Color = clLime
-      Font.Height = -20
+      Font.Height = -16
       Font.Name = 'Courier New'
       Font.Pitch = fpFixed
       Font.Quality = fqDraft
@@ -625,117 +625,117 @@ object frmMain: TfrmMain
       WordWrap = False
     end
     object EditExe1: TEdit
-      Left = 20
-      Height = 28
-      Top = 465
-      Width = 170
+      Left = 16
+      Height = 24
+      Top = 372
+      Width = 136
       ParentFont = False
       TabOrder = 1
       Text = 'freq 1000 30'
     end
     object EditExe2: TEdit
-      Left = 20
-      Height = 28
-      Top = 500
-      Width = 170
+      Left = 16
+      Height = 24
+      Top = 400
+      Width = 136
       ParentFont = False
       TabOrder = 2
       Text = 'out 1'
     end
     object EditExe3: TEdit
-      Left = 20
-      Height = 28
-      Top = 534
-      Width = 170
+      Left = 16
+      Height = 24
+      Top = 427
+      Width = 136
       ParentFont = False
       TabOrder = 3
       Text = 'chp ~'
     end
     object ButtonExe1: TButton
-      Left = 200
-      Height = 29
-      Top = 465
-      Width = 70
+      Left = 160
+      Height = 23
+      Top = 372
+      Width = 56
       Caption = 'Execute'
       OnClick = ButtonExe1Click
       ParentFont = False
       TabOrder = 4
     end
     object ButtonExe2: TButton
-      Left = 200
-      Height = 29
-      Top = 500
-      Width = 70
+      Left = 160
+      Height = 23
+      Top = 400
+      Width = 56
       Caption = 'Execute'
       OnClick = ButtonExe1Click
       ParentFont = False
       TabOrder = 5
     end
     object ButtonExe3: TButton
-      Left = 200
-      Height = 29
-      Top = 534
-      Width = 70
+      Left = 160
+      Height = 23
+      Top = 427
+      Width = 56
       Caption = 'Execute'
       OnClick = ButtonExe1Click
       ParentFont = False
       TabOrder = 6
     end
     object ButtonRTCSync: TButton
-      Left = 460
-      Height = 29
-      Top = 465
-      Width = 144
+      Left = 368
+      Height = 23
+      Top = 372
+      Width = 115
       Caption = 'RTC sync (settime)'
       OnClick = ButtonRTCSyncClick
       ParentFont = False
       TabOrder = 7
     end
     object ButtonRTCSync1: TButton
-      Left = 460
-      Height = 29
-      Top = 534
-      Width = 144
+      Left = 368
+      Height = 23
+      Top = 427
+      Width = 115
       Caption = 'Remove script (rm)'
       OnClick = ButtonRTCSync1Click
       ParentFont = False
       TabOrder = 8
     end
     object ButtonRTCSync2: TButton
-      Left = 460
-      Height = 29
-      Top = 500
-      Width = 144
+      Left = 368
+      Height = 23
+      Top = 400
+      Width = 115
       Caption = 'RTC time (gettime)'
       OnClick = ButtonRTCSync2Click
       ParentFont = False
       TabOrder = 9
     end
     object ButtonRTCSync3: TButton
-      Left = 290
-      Height = 29
-      Top = 465
-      Width = 150
+      Left = 232
+      Height = 23
+      Top = 372
+      Width = 120
       Caption = 'Turn off (off)'
       OnClick = ButtonRTCSync3Click
       ParentFont = False
       TabOrder = 10
     end
     object ButtonReset: TButton
-      Left = 290
-      Height = 29
-      Top = 500
-      Width = 150
+      Left = 232
+      Height = 23
+      Top = 400
+      Width = 120
       Caption = 'Reset device'
       OnClick = ButtonResetClick
       ParentFont = False
       TabOrder = 11
     end
     object ButtonRTCSync5: TButton
-      Left = 290
-      Height = 29
-      Top = 534
-      Width = 150
+      Left = 232
+      Height = 23
+      Top = 427
+      Width = 120
       Caption = 'List script (ls)'
       OnClick = ButtonRTCSync5Click
       ParentFont = False
@@ -752,23 +752,23 @@ object frmMain: TfrmMain
     Device = 'COM1'
     RcvLineCRLF = False
     OnRxData = serialRxData
-    left = 820
-    top = 50
+    left = 656
+    top = 40
   end
   object openDlg: TOpenDialog
     Title = 'Open existing therapy script'
     DefaultExt = '.txt'
     Filter = 'txt|*.txt'
     Options = []
-    left = 960
-    top = 50
+    left = 768
+    top = 40
   end
   object saveDlg: TSaveDialog
     Title = 'Save file as therapy script'
     DefaultExt = '.txt'
     Filter = 'txt|*.txt'
     Options = []
-    left = 890
-    top = 50
+    left = 712
+    top = 40
   end
 end

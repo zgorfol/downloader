@@ -1,5 +1,5 @@
 unit bioFunctions;
-(* elektros: 2020-06-10
+(* elektros: 2020-06-21
  * Module for definitions and converters physical models
  *
  *   Copyleft 2020 by elektros, Chris Czoba krzysiek@biotronika.pl.
@@ -15,7 +15,7 @@ uses
 
 
 const
-    SOFTWARE_VERSION = '2020-06-19 (alpha)';
+    SOFTWARE_VERSION = '2020-06-21 (beta rc1)';
 
 
 // MULTIPLATFORM DEFINITIONS
@@ -23,37 +23,41 @@ const
     BIO_DELIMETER = ',';
 
   {$IFDEF DARWIN}
-    OS_VERSION           = 'Mac OS;
-    BIO_FOLDER_DELIMETER = '/';
-    FIRST_SERIAL_PORT    = '/dev/tty0';
+    OS_VERSION             = 'Mac OS;
+    BIO_FOLDER_DELIMETER   = '/';
+    BIO_HIDDEN_FILE_PREFIX = '.';
+    FIRST_SERIAL_PORT      = '/dev/tty0';
   {$ELSE}
 
 
   {$IFDEF Linux}
-    OS_VERSION           = 'Linux';
-    BIO_FOLDER_DELIMETER = '/';
-    FIRST_SERIAL_PORT    = '/dev/ttyS1';
+    OS_VERSION             = 'Linux';
+    BIO_FOLDER_DELIMETER   = '/';
+    BIO_HIDDEN_FILE_PREFIX = '.';
+    FIRST_SERIAL_PORT      = '/dev/ttyS1';
   {$ELSE}
 
 
   {$IFDEF UNIX}
-    OS_VERSION           = 'Unix';
-    BIO_FOLDER_DELIMETER = '/';
-    FIRST_SERIAL_PORT    = '/dev/tty0';
+    OS_VERSION             = 'Unix';
+    BIO_FOLDER_DELIMETER   = '/';
+    BIO_HIDDEN_FILE_PREFIX = '.';
+    FIRST_SERIAL_PORT      = '/dev/tty0';
   {$ELSE}
 
 
   {$IFDEF WINDOWS}
   {$IFDEF WIN32}
-    OS_VERSION           = 'Windows 32bit';
+    OS_VERSION             = 'Windows 32bit';
   {$ELSE}
   {$IFDEF WIN64}
-    OS_VERSION           = 'Windows 64bit';
+    OS_VERSION             = 'Windows 64bit';
   {$ENDIF}
   {$ENDIF}
 
-    BIO_FOLDER_DELIMETER = '\';
-    FIRST_SERIAL_PORT    = 'COM1';
+    BIO_FOLDER_DELIMETER   = '\';
+    FIRST_SERIAL_PORT      = 'COM1';
+    BIO_HIDDEN_FILE_PREFIX = '';
   {$ENDIF}
   {$ENDIF}
   {$ENDIF}
@@ -62,9 +66,6 @@ const
 
      DEFAULT_EAP_THERAPY_TIME = 120; // 120 seconds
      PROFILES : array[0..6] of string = ( 'User', 'Common', 'Stimulation', 'Sedation', 'DC-', 'DC+', 'DC change');
-
-
-     TEMPORARY_FILE = '~temp.txt';
 
 
      MODE_UNK =-1; //unknown

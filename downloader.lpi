@@ -17,7 +17,7 @@
       </XPManifest>
       <Icon Value="0"/>
     </General>
-    <BuildModes Count="4">
+    <BuildModes Count="5">
       <Item1 Name="Default" Default="True"/>
       <Item2 Name="Win64 debug">
         <CompilerOptions>
@@ -28,7 +28,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1"/>
+            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1\"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Linking>
@@ -49,7 +49,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1"/>
+            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1\"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Linking>
@@ -73,7 +73,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1"/>
+            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1\"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -92,6 +92,27 @@
           </Linking>
         </CompilerOptions>
       </Item4>
+      <Item5 Name="Win64 debug with name">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="bin\$(TargetOS)\24"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1\"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Linking>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+        </CompilerOptions>
+      </Item5>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -126,21 +147,22 @@
         <UnitName Value="unitMain"/>
       </Unit1>
       <Unit2>
-        <Filename Value="unitchoosetherapy.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="FormChooseTherapy"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-      </Unit2>
-      <Unit3>
         <Filename Value="biofunctions.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="bioFunctions"/>
-      </Unit3>
-      <Unit4>
+      </Unit2>
+      <Unit3>
         <Filename Value="biorest.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="bioREST"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="unitchooselist.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormChooseList"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="unitChooseList"/>
       </Unit4>
     </Units>
   </ProjectOptions>
@@ -152,7 +174,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1"/>
+      <Libraries Value="C:\Users\kczoba\AppData\Local\lazarus\onlinepackagemanager\packages\synapse40.1\"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
