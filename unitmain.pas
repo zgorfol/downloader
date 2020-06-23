@@ -267,7 +267,7 @@ begin
          readBuffer:='';
 
       end else
-         readBuffer:=readBuffer+s[i];
+        if (s[i]<>#13) then readBuffer:=readBuffer+s[i];
 
   end;
 

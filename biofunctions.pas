@@ -15,7 +15,7 @@ uses
 
 
 const
-    SOFTWARE_VERSION = '2020-06-21 (beta rc1)';
+    SOFTWARE_VERSION = '2020-06-23 (beta rc2)';
 
 
 // MULTIPLATFORM DEFINITIONS
@@ -23,10 +23,10 @@ const
     BIO_DELIMETER = ',';
 
   {$IFDEF DARWIN}
-    OS_VERSION             = 'Mac OS;
+    OS_VERSION             = 'Mac OS';
     BIO_FOLDER_DELIMETER   = '/';
     BIO_HIDDEN_FILE_PREFIX = '.';
-    FIRST_SERIAL_PORT      = '/dev/tty0';
+    FIRST_SERIAL_PORT      = '/dev/cu.*';
   {$ELSE}
 
 
